@@ -65,11 +65,11 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [X] Commit: `Implement unsubscribe function in Notification controller.`
     -   [X] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
-    -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
-    -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
-    -   [ ] Commit: `Implement publish function in Program service and Program controller.`
-    -   [ ] Commit: `Edit Product service methods to call notify after create/delete.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+    -   [X] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
+    -   [X] Commit: `Implement notify function in Notification service to notify each Subscriber.`
+    -   [X] Commit: `Implement publish function in Program service and Program controller.`
+    -   [X] Commit: `Edit Product service methods to call notify after create/delete.`
+    -   [X] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -95,3 +95,9 @@ This is the place for you to write reflections:
 
 
 #### Reflection Publisher-3
+
+1. Pada tutorial ini menggunakan variasi Push model dari Observer Pattern. Ini terlihat jelas dari cara `NotificationService` secara aktif mengirimkan notifikasi ke semua subscriber melalui metode `notify()` yang kemudian memanggil metode `update()` pada setiap subscriber untuk mengirimkan payload notifikasi. Publisher (dalam kasus ini `ProductService`) mendorong data ke subscriber tanpa subscriber perlu memintanya.
+
+2. Jika menggunakan model Pull, keuntungannya adalah subscriber bisa mengambil data sesuai kebutuhan dan kapasitas mereka, mengurangi beban pada subscriber yang mungkin tidak siap menerima notifikasi, serta mengurangi pengiriman data yang tidak perlu. Namun, kekurangannya adalah responsivitas akan berkurang karena subscriber mungkin tidak segera mengetahui perubahan, memerlukan mekanisme polling yang bisa membuang sumber daya jika tidak diimplementasikan dengan baik, serta memerlukan penyimpanan status terakhir pada publisher yang bisa menjadi rumit.
+
+3. Jika tidak menggunakan multi-threading dalam proses notifikasi, program akan menjadi blocking pada saat pengiriman notifikasi ke semua subscriber. Ini berarti operasi utama seperti pembuatan produk, penghapusan, atau publikasi harus menunggu hingga semua notifikasi terkirim sebelum mengembalikan respons ke pengguna, yang dapat menyebabkan keterlambatan respons yang signifikan terutama jika ada banyak subscriber atau jika layanan webhook subscriber lambat merespons, sehingga pengalaman pengguna akan terdampak negatif.
