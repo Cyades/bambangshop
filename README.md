@@ -48,15 +48,15 @@ You can install Postman via this website: https://www.postman.com/downloads/
     (You might want to use `cargo check` if you only need to verify your work without running the app.)
 
 ## Mandatory Checklists (Publisher)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
+-   [X] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Subscriber model struct.`
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Subscriber repository.`
-    -   [ ] Commit: `Implement list_all function in Subscriber repository.`
-    -   [ ] Commit: `Implement delete function in Subscriber repository.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
+    -   [X] Commit: `Create Subscriber model struct.`
+    -   [X] Commit: `Create Notification model struct.`
+    -   [X] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
+    -   [X] Commit: `Implement add function in Subscriber repository.`
+    -   [X] Commit: `Implement list_all function in Subscriber repository.`
+    -   [X] Commit: `Implement delete function in Subscriber repository.`
+    -   [X] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -77,6 +77,13 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
+
+1. Menurut saya dalam kasus BambangShop ini, menggunakan struct untuk Subscriber sudah cukup karena semua subscriber memiliki perilaku yang sama dalam menerima notifikasi. Trait (interface) biasanya diperlukan ketika kita membutuhkan implementasi yang berbeda-beda untuk subscriber, misalnya jika ada subscriber email, webhook, atau in-app yang masing-masing memiliki cara penanganan notifikasi yang berbeda. Namun, jika di masa depan BambangShop membutuhkan tipe subscriber yang beragam, implementasi trait akan memberikan fleksibilitas lebih.
+
+2. Menurut saya penggunaan DashMap dibandingkan Vec sangat tepat untuk kasus ini karena DashMap menawarkan pencarian dengan kompleksitas O(1) berdasarkan key (id product atau url subscriber), menjamin keunikan key secara alami, dan memberikan thread safety secara bawaan. Vec akan membutuhkan pencarian linear O(n) yang kurang efisien serta logika tambahan untuk memastikan keunikan dan penanganan konkurensi, sehingga DashMap lebih cocok untuk aplikasi web yang memerlukan akses cepat berdasarkan id/url.
+
+3. Menurut saya implementasi saat ini sudah tepat menggunakan kombinasi Singleton pattern (melalui lazy_static!) dengan DashMap. Singleton pattern memastikan hanya ada satu instans SUBSCRIBERS yang digunakan di seluruh aplikasi, sementara DashMap memberikan kemampuan thread-safe agar daftar SUBSCRIBERS tersebut dapat diakses oleh banyak thread secara bersamaan tanpa menyebabkan race condition. Keduanya memang diperlukan: Singleton untuk memastikan konsistensi data dengan menggunakan satu sumber kebenaran, dan DashMap untuk memungkinkan konkurensi yang efisien dengan fine-grained locking. Jadi, kedua konsep ini tidak saling menggantikan melainkan saling melengkapi untuk menciptakan sistem yang thread-safe dan konsisten.
+
 
 #### Reflection Publisher-2
 
