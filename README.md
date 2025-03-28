@@ -58,12 +58,12 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [X] Commit: `Implement delete function in Subscriber repository.`
     -   [X] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
+    -   [X] Commit: `Create Notification service struct skeleton.`
+    -   [X] Commit: `Implement subscribe function in Notification service.`
+    -   [X] Commit: `Implement subscribe function in Notification controller.`
+    -   [X] Commit: `Implement unsubscribe function in Notification service.`
+    -   [X] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [X] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
     -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
     -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
@@ -86,5 +86,12 @@ This is the place for you to write reflections:
 
 
 #### Reflection Publisher-2
+
+1. Pemisahan "Service" dan "Repository" dari Model diperlukan karena menerapkan prinsip Single Responsibility Principle (SRP), di mana setiap kelas seharusnya hanya memiliki satu alasan untuk berubah. Repository menangani akses dan persistensi data, sementara Service menangani logika bisnis, sehingga kode menjadi lebih terstruktur, mudah diuji, dan dapat diubah tanpa memengaruhi komponen lain.
+
+2. Jika hanya menggunakan Model, semua logika bisnis dan akses data akan terakumulasi dalam satu kelas, yang menyebabkan model menjadi terlalu besar dan kompleks. Interaksi antara Program, Subscriber, dan Notification akan meningkatkan ketergantungan antar model, membuat kode sulit dimaintain, dan perubahan pada satu model mungkin akan memengaruhi model lainnya.
+
+3. Postman sangat membantu dalam pengujian API dengan memungkinkan pembuatan request HTTP (GET, POST, DELETE) tanpa perlu menulis kode front-end, menyimpan koleksi request untuk digunakan kembali, membuat environment variables untuk testing di berbagai lingkungan, serta fitur automasi testing dengan Newman yang sangat berguna untuk continuous integration dalam pengembangan proyek.
+
 
 #### Reflection Publisher-3
